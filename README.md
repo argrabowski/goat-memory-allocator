@@ -39,31 +39,21 @@ This project implements the Goat memory allocator, a user-space memory managemen
     ./test_goatmalloc
     ```
 
-### Usage
-
-- Include `goatmalloc.h` in your application code.
-- Use `init`, `walloc`, `wfree`, and `destroy` functions as described in the header file.
-
 ## Project Details
 
-### Initialization and Destruction
+- **Initialization and Destruction**
+  - The `init` function initializes the memory allocator, requesting an arena from the OS.
+  - The `destroy` function releases the arena back to the OS.
 
-- The `init` function initializes the memory allocator, requesting an arena from the OS.
-- The `destroy` function releases the arena back to the OS.
+- **Basic Allocation**
+  - The `walloc` function allocates memory within the arena.
+  - The `wfree` function frees allocated memory.
 
-### Basic Allocation
+- **Free Chunk Splitting**
+  - Handles splitting of free chunks when necessary.
 
-- The `walloc` function allocates memory within the arena.
-- The `wfree` function frees allocated memory.
+- **Placement of Allocations**
+  - Maintains a logically ordered chunk list.
 
-### Free Chunk Splitting
-
-- Handles splitting of free chunks when necessary.
-
-### Placement of Allocations
-
-- Maintains a logically ordered chunk list.
-
-### Free Chunk Coalescing
-
-- Coalesces adjacent free chunks when freeing memory.
+- **Free Chunk Coalescing**
+  - Coalesces adjacent free chunks when freeing memory.
