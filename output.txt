@@ -1,0 +1,526 @@
+>> Testing initialization.
+Initializing Arena:
+...requested size 1 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Destroying Arena:
+...unmapping arena with munmap()
+Initializing Arena:
+...requested size 8182 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 8192 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff5000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Destroying Arena:
+...unmapping arena with munmap()
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Destroying Arena:
+...unmapping arena with munmap()
+Initializing Arena:
+...bad arguments error
+Destroying Arena:
+...uninitialized error
+>> Testing allocations without the possibility to split. No Frees.
+Allocating Memory:
+...uninitialized error
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 4096 bytes
+...out of memory error
+Allocating Memory:
+...looking for free chunk of >= 4064 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is not required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Allocating Memory:
+...looking for free chunk of >= 1 bytes
+...out of memory error
+Destroying Arena:
+...unmapping arena with munmap()
+>>Testing frees without coalescing.
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 4064 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is not required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6020
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6000
+...chunk is of size 4064
+...checking if coalescing is needed
+...coalescing not needed
+Destroying Arena:
+...unmapping arena with munmap()
+>>Testing allocations with splits.
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Header->size: 64
+Header->fwd: 0x7ffff7ff6060
+Header->bwd: (nil)
+Header->is_free: 0
+Header->size: 3968
+Header->fwd: (nil)
+Header->bwd: 0x7ffff7ff6000
+Header->is_free: 1
+Allocating Memory:
+...looking for free chunk of >= 3968 bytes
+...found free chunk of 3968 bytes with header at 0x7ffff7ff6060
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6000
+...checking if splitting is required
+...splitting is not required
+...updating chunk header at 0x7ffff7ff6060
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6080
+Header->size: 3968
+Header->fwd: (nil)
+Header->bwd: 0x7ffff7ff6000
+Header->is_free: 0
+Destroying Arena:
+...unmapping arena with munmap()
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Allocating Memory:
+...looking for free chunk of >= 3958 bytes
+...found free chunk of 3968 bytes with header at 0x7ffff7ff6060
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6000
+...checking if splitting is required
+...splitting not possible
+...updating chunk header at 0x7ffff7ff6060
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6080
+Header->size: 3968
+Header->fwd: (nil)
+Header->bwd: 0x7ffff7ff6000
+Header->is_free: 0
+Destroying Arena:
+...unmapping arena with munmap()
+>> Testing basic allocation free placement.
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 32 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Header->size: 32
+Header->fwd: 0x7ffff7ff6040
+Header->bwd: (nil)
+Header->is_free: 0
+Allocating Memory:
+...looking for free chunk of >= 32 bytes
+...found free chunk of 4000 bytes with header at 0x7ffff7ff6040
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6000
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6040
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6060
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6020
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6000
+...chunk is of size 32
+...checking if coalescing is needed
+...coalescing not needed
+Allocating Memory:
+...looking for free chunk of >= 32 bytes
+...found free chunk of 32 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to 0x7ffff7ff6040
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is not required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Destroying Arena:
+...unmapping arena with munmap()
+>>Testing frees with coalescing. Case 1.
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Allocating Memory:
+...looking for free chunk of >= 128 bytes
+...found free chunk of 3968 bytes with header at 0x7ffff7ff6060
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6000
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6060
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6080
+Allocating Memory:
+...looking for free chunk of >= 3808 bytes
+...found free chunk of 3808 bytes with header at 0x7ffff7ff6100
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6060
+...checking if splitting is required
+...splitting is not required
+...updating chunk header at 0x7ffff7ff6100
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6120
+Header->size: 64
+Header->fwd: 0x7ffff7ff6060
+Header->bwd: (nil)
+Header->is_free: 0
+Header->size: 128
+Header->fwd: 0x7ffff7ff6100
+Header->bwd: 0x7ffff7ff6000
+Header->is_free: 0
+Header->size: 3808
+Header->fwd: (nil)
+Header->bwd: 0x7ffff7ff6060
+Header->is_free: 0
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6020
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6000
+...chunk is of size 64
+...checking if coalescing is needed
+...coalescing not needed
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6120
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6100
+...chunk is of size 3808
+...checking if coalescing is needed
+...coalescing not needed
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6080
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6060
+...chunk is of size 128
+...checking if coalescing is needed
+...coalescing needed
+...col. case 1: previous, current, and next chunks free
+Header->size: 4064
+Header->fwd: (nil)
+Header->bwd: (nil)
+Header->is_free: 1
+Destroying Arena:
+...unmapping arena with munmap()
+>>Testing frees with coalescing. Case 2.
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Allocating Memory:
+...looking for free chunk of >= 3968 bytes
+...found free chunk of 3968 bytes with header at 0x7ffff7ff6060
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6000
+...checking if splitting is required
+...splitting is not required
+...updating chunk header at 0x7ffff7ff6060
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6080
+Header->size: 64
+Header->fwd: 0x7ffff7ff6060
+Header->bwd: (nil)
+Header->is_free: 0
+Header->size: 3968
+Header->fwd: (nil)
+Header->bwd: 0x7ffff7ff6000
+Header->is_free: 0
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6020
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6000
+...chunk is of size 64
+...checking if coalescing is needed
+...coalescing not needed
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6080
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6060
+...chunk is of size 3968
+...checking if coalescing is needed
+...coalescing needed
+...col. case 2: previous and current chunks free
+Header->size: 4064
+Header->fwd: (nil)
+Header->bwd: (nil)
+Header->is_free: 1
+Destroying Arena:
+...unmapping arena with munmap()
+>>Testing frees with coalescing. Case 3.
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Allocating Memory:
+...looking for free chunk of >= 3968 bytes
+...found free chunk of 3968 bytes with header at 0x7ffff7ff6060
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6000
+...checking if splitting is required
+...splitting is not required
+...updating chunk header at 0x7ffff7ff6060
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6080
+Header->size: 64
+Header->fwd: 0x7ffff7ff6060
+Header->bwd: (nil)
+Header->is_free: 0
+Header->size: 3968
+Header->fwd: (nil)
+Header->bwd: 0x7ffff7ff6000
+Header->is_free: 0
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6080
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6060
+...chunk is of size 3968
+...checking if coalescing is needed
+...coalescing not needed
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6020
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6000
+...chunk is of size 64
+...checking if coalescing is needed
+...coalescing needed
+...col. case 3: current and next chunks free
+Header->size: 4064
+Header->fwd: (nil)
+Header->bwd: (nil)
+Header->is_free: 1
+Destroying Arena:
+...unmapping arena with munmap()
+>>Testing frees with coalescing chaining
+Initializing Arena:
+...requested size 4096 bytes
+...pagesize is 4096 bytes
+...adjusting size with page boundaries
+...adjusted size is 4096 bytes
+...mapping arena with mmap()
+...arena starts at 0x7ffff7ff6000
+...arena ends at 0x7ffff7ff7000
+...initializing header for initial free chunk
+...header size is 32 bytes
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 4064 bytes with header at 0x7ffff7ff6000
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to (nil)
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6000
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6020
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 3968 bytes with header at 0x7ffff7ff6060
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6000
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6060
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6080
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 3872 bytes with header at 0x7ffff7ff60c0
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff6060
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff60c0
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff60e0
+Allocating Memory:
+...looking for free chunk of >= 64 bytes
+...found free chunk of 3776 bytes with header at 0x7ffff7ff6120
+...free chunk->fwd currently points to (nil)
+...free chunk->bwd currently points to 0x7ffff7ff60c0
+...checking if splitting is required
+...splitting is required
+...updating chunk header at 0x7ffff7ff6120
+...being careful with pointer arithmetic and void pointer casting
+...allocation starts at 0x7ffff7ff6140
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6020
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6000
+...chunk is of size 64
+...checking if coalescing is needed
+...coalescing not needed
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6080
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6060
+...chunk is of size 64
+...checking if coalescing is needed
+...coalescing needed
+...col. case 2: previous and current chunks free
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff60e0
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff60c0
+...chunk is of size 64
+...checking if coalescing is needed
+...coalescing needed
+...col. case 2: previous and current chunks free
+Freeing Allocated Memory:
+...supplied pointer 0x7ffff7ff6140
+...being careful with pointer arithmetic and void pointer casting
+...accessing chunk header at 0x7ffff7ff6120
+...chunk is of size 64
+...checking if coalescing is needed
+...coalescing needed
+...col. case 1: previous, current, and next chunks free
+Header->size: 160
+Header->fwd: 0x7ffff7ff60c0
+Header->bwd: (nil)
+Header->is_free: 1
+test_goatmalloc: test_goatmalloc.c:391: test_free_coalescing_chains_fwd: Assertion `header->size == page_size - sizeof(node_t)' failed.
+Aborted (core dumped)
